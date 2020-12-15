@@ -22,13 +22,14 @@
 
             <script type="text/javascript">
             //My api key
-            var apikey = {
+            var apikey= {
                 key:'71f6ed51-07ef-4bca-8f43-0076f0b90577'
             }
             //Get Fetch Requisition
-            fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY='+apikey.key)
-            .then((Response)=>{
-                if(!response.ok) throw new Error('Erro ao executar a requisição, status' + response.status);
+            fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY=' + apikey.key)
+            .then((Response)=> {
+                if(!response.ok) 
+                throw new Error('Erro ao executar a requisição, status' + response.status);
                 return response.json();
             })
             .then((api) => {
@@ -38,18 +39,28 @@
                 for(let i =0; i < 10; i++){
 
 
+                    //show API information
 
-                    //show API INformation
+                    texto = texto + '
 
-                    texto = texto +'
-                    
                     <div class="media">
-                        <img src="coin.jpg" class= "align-self-center mr-3" alt="coin" width="100" heigth="60">
+                        <img src="coin.jpg" class="align-self-center mr-3" alt="coin" width="100" heigth="60">
                         <div class="media-body">
-                            <h5 class="mt-2">'
+                            <h5 class="mt-2">${api.data[i].name}</h5>
+                            <p>${api.data[i].symbol}</p>
+                        </div>
+
+                    </div>
+                            
+                    ';
+
+                    document.getElementById("coins").innerHTML = text;
+
                 }
             })
-                </script>
-    
+            .catch((error) => {
+                console.error(error.message);
+            });
+    </script>
 </body>
 </html>
